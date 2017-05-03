@@ -6,7 +6,6 @@ namespace MusicUploader.Models.ViewModels.Account
     {
         [Required]
         [Display(Name = "Username")]
-        [EmailAddress]
         public string Username { get; set; }
 
         [Required]

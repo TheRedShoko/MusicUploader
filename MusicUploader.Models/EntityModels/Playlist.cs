@@ -6,7 +6,7 @@ namespace MusicUploader.Models.EntityModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual IEnumerable<Song> Songs { get; set; }
+        public virtual ICollection<Song> Songs { get; set; }
         public virtual ApplicationUser Owner { get; set; }
     }
 }

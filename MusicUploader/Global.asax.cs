@@ -1,6 +1,12 @@
 ﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
+using MusicUploader.Models.BindingModels.Genre;
+using MusicUploader.Models.BindingModels.Song;
+using MusicUploader.Models.EntityModels;
+using MusicUploader.Models.ViewModels.Genre;
+using MusicUploader.Models.ViewModels.Song;
 
 namespace MusicUploader
 {
@@ -8,10 +14,31 @@ namespace MusicUploader
     {
         protected void Application_Start()
         {
+            ConfigureMapper();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        private void ConfigureMapper()
+        {
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Song, ViewSongViewModel>();
+                config.CreateMap<Song, DetailedSongViewModel>();
+                config.CreateMap<UploadSongBindingModel, Song>();
+                config.CreateMap<Song, EditSongViewModel>();
+                config.CreateMap<EditSongBindingModel, Song>();
+                config.CreateMap<EditSongBindingModel, EditSongViewModel>();
+                config.CreateMap<Song, DeleteSongViewModel>();
+
+                config.CreateMap<Genre, ListGenreViewModel>();
+                config.CreateMap<CreateGenreBindingModel, Genre>();
+                config.CreateMap<Genre, EditGenreViewModel>();
+                config.CreateMap<EditGenreBindingModel, Genre>();
+            });
         }
     }
 }

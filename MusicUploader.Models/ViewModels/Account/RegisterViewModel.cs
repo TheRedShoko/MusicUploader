@@ -5,12 +5,10 @@ namespace MusicUploader.Models.ViewModels.Account
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
         [Display(Name = "Username")]
         public string Username { get; set; }
 
         [Required]
-        [EmailAddress]
         [Display(Name = "Full name")]
         public string FullName { get; set; }
 
