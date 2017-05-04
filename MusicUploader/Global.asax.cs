@@ -3,9 +3,11 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using MusicUploader.Models.BindingModels.Genre;
+using MusicUploader.Models.BindingModels.Playlist;
 using MusicUploader.Models.BindingModels.Song;
 using MusicUploader.Models.EntityModels;
 using MusicUploader.Models.ViewModels.Genre;
+using MusicUploader.Models.ViewModels.Playlist;
 using MusicUploader.Models.ViewModels.Song;
 
 namespace MusicUploader
@@ -38,6 +40,13 @@ namespace MusicUploader
                 config.CreateMap<CreateGenreBindingModel, Genre>();
                 config.CreateMap<Genre, EditGenreViewModel>();
                 config.CreateMap<EditGenreBindingModel, Genre>();
+
+                config.CreateMap<Playlist, ViewPlaylistViewModel>();
+                config.CreateMap<Playlist, ListPlaylistSongsViewModel>();
+                config.CreateMap<CreatePlaylistBindingModel, Playlist>();
+                config.CreateMap<Playlist, EditPlaylistViewModel>();
+                config.CreateMap<EditPlaylistBindingModel, Playlist>();
+                config.CreateMap<EditPlaylistBindingModel, EditPlaylistViewModel>();
             });
         }
     }

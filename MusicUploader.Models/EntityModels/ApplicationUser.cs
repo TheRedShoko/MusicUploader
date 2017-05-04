@@ -10,9 +10,9 @@ namespace MusicUploader.Models.EntityModels
     public class ApplicationUser : IdentityUser
     {
         public string FullName { get; set; }
-        public IEnumerable<Song> Songs { get; set; }
-        public IEnumerable<Comment> Comments { get; set; }
-        public IEnumerable<Playlist> Playlists { get; set; }
+        public virtual ICollection<Song> Songs { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Playlist> Playlists { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
