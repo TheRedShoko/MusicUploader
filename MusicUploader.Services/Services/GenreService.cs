@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using AutoMapper;
 using MusicUploader.Data;
 using MusicUploader.Models.BindingModels.Genre;
@@ -44,12 +45,22 @@ namespace MusicUploader.Services.Services
 
         public void DeleteGenre(Genre genre)
         {
-            foreach (var song in genre.Songs)
+            foreach (var song in genre.Songs.ToList())
             {
-                context.Songs.Remove(song);
+                this.DeleteSong(song);
             }
             this.context.Genres.Remove(genre);
             this.context.SaveChanges();
+        }
+
+        public void DeleteSong(Song song)
+        {            
+            foreach (var comment in song.Comments.ToList())
+            {
+                context.Comments.Remove(comment);
+            }
+
+            context.Songs.Remove(song);
         }
     }
 }

@@ -10,19 +10,20 @@
     {
         @Html.ActionLink("Upload New", "Upload", null, new { @class = "btn btn-md btn-primary" })
     }
+    @Html.ActionLink("Search for song", "Search", null, new {@class="btn btn-md btn-warning"})
 </p>
 <br />
 
 <div class="container">
     <div class="list-group col-sm-3">
-        @Ajax.ActionLink("All", "Update", new { genreId = 0 }, new AjaxOptions()
+        @Ajax.ActionLink("All", "UpdateIndexSongs", new { genreId = 0 }, new AjaxOptions()
 {
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "songsList"
 }, new { @class = "list-group-item" })
         @foreach (var genre in Model.Genres)
         {
-            @Ajax.ActionLink(genre.Name, "Update", new { genreId = genre.Id }, new AjaxOptions()
+            @Ajax.ActionLink(genre.Name, "UpdateIndexSongs", new { genreId = genre.Id }, new AjaxOptions()
    {
        InsertionMode = InsertionMode.Replace,
        UpdateTargetId = "songsList"

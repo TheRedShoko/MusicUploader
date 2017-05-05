@@ -2,6 +2,7 @@
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
+using MusicUploader.Data;
 using MusicUploader.Models.BindingModels.Comment;
 using MusicUploader.Models.BindingModels.Genre;
 using MusicUploader.Models.BindingModels.Playlist;
@@ -11,6 +12,9 @@ using MusicUploader.Models.ViewModels.Comment;
 using MusicUploader.Models.ViewModels.Genre;
 using MusicUploader.Models.ViewModels.Playlist;
 using MusicUploader.Models.ViewModels.Song;
+using MusicUploader.Services.Interfaces;
+using MusicUploader.Services.Services;
+using Ninject;
 
 namespace MusicUploader
 {

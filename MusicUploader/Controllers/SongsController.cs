@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
@@ -57,14 +58,46 @@ namespace MusicUploader.Controllers
         }
 
         [HttpGet]
-        public ActionResult Update(int genreId)
+        public ActionResult UpdateIndexSongs(int genreId)
         {
             var viewModel = new ListSongsViewModel()
             {
                 Songs = this.service.GetSongsByGenreId(genreId)
             };
 
-            return PartialView("_ViewSongsPartial", viewModel);
+            return PartialView("_ListSongsPartial", viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Search()
+        {
+            return this.View();
+        }
+
+        [HttpGet]
+        public ActionResult SearchFor(SearchSongBindingModel model)
+        {
+            var results = new HashSet<Song>();
+
+            if (model.MatchWithSongName)
+            {
+                results.UnionWith(this.service.GetSongsNameContaining(model.SearchFor));
+            }
+            if (model.MatchWithUploaderName)
+            {
+                results.UnionWith(this.service.GetSongsUploaderNameContaining(model.SearchFor));
+            }
+            if (model.MatchWithUploaderUserName)
+            {
+                results.UnionWith(this.service.GetSongsUploaderUserNameContaining(model.SearchFor));
+            }
+
+            var viewModel = new ListSongsViewModel()
+            {
+                Songs = results
+            };
+
+            return this.PartialView("_ListSongsPartial", viewModel);
         }
 
         [HttpGet]
@@ -118,10 +151,12 @@ namespace MusicUploader.Controllers
             }
 
             var viewModel = Mapper.Instance.Map<Song, EditSongViewModel>(song);
+            ViewBag.Genres = this.service.GetAvailableGenres();
+
             return View(viewModel);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditSongBindingModel model)
@@ -138,9 +173,9 @@ namespace MusicUploader.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                 }
 
-                song = Mapper.Instance.Map<EditSongBindingModel, Song>(model, song);
+                
 
-                service.SongModified(song);
+                service.SongModified(song, model);
 
                 return RedirectToAction("Index");
             }

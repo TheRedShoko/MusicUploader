@@ -101,6 +101,7 @@
     <Compile Include="BindingModels\Playlist\EditPlaylistBindingModel.cs" />
     <Compile Include="BindingModels\Playlist\CreatePlaylistBindingModel.cs" />
     <Compile Include="BindingModels\Song\EditSongBindingModel.cs" />
+    <Compile Include="BindingModels\Song\SearchSongBindingModel.cs" />
     <Compile Include="BindingModels\Song\UploadSongBindingModel.cs" />
     <Compile Include="EntityModels\ApplicationUser.cs" />
     <Compile Include="EntityModels\Comment.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="ViewModels\Song\DetailedSongViewModel.cs" />
     <Compile Include="ViewModels\Song\EditSongViewModel.cs" />
     <Compile Include="ViewModels\Song\ListSongsViewModel.cs" />
+    <Compile Include="ViewModels\Song\SearchSongViewModel.cs" />
     <Compile Include="ViewModels\Song\SongsIndexViewModel.cs" />
     <Compile Include="ViewModels\Song\ViewSongViewModel.cs" />
   </ItemGroup>

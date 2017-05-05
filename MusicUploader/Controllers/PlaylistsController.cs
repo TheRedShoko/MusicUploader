@@ -131,7 +131,6 @@ namespace MusicUploader.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             var playlist = this.service.FindPlaylistById(id);

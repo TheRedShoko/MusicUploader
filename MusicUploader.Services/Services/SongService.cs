@@ -73,14 +73,21 @@ namespace MusicUploader.Services.Services
             context.SaveChanges();
         }
 
-        public void SongModified(Song song)
+        public void SongModified(Song song, EditSongBindingModel model)
         {
+            song = Mapper.Instance.Map<EditSongBindingModel, Song>(model, song);
+            song.Genre = this.context.Genres.Find(model.GenreId);
             context.Entry(song).State = EntityState.Modified;
             context.SaveChanges();
         }
 
         public void DeleteSong(Song song)
         {
+            foreach (var comment in song.Comments.ToList())
+            {
+                context.Comments.Remove(comment);
+            }
+
             context.Songs.Remove(song);
             context.SaveChanges();
         }
@@ -103,6 +110,24 @@ namespace MusicUploader.Services.Services
             var playlists = user.Playlists.Where(pl => !pl.Songs.Contains(song)).ToList();
 
             return playlists;
+        }
+
+        public IEnumerable<Song> GetSongsNameContaining(string match)
+        {
+            var songs = this.context.Songs.Where(song => song.SongName.Contains(match));
+            return songs;
+        }
+
+        public IEnumerable<Song> GetSongsUploaderNameContaining(string match)
+        {
+            var songs = this.context.Songs.Where(song => song.Uploader.FullName.Contains(match));
+            return songs;
+        }
+
+        public IEnumerable<Song> GetSongsUploaderUserNameContaining(string match)
+        {
+            var songs = this.context.Songs.Where(song => song.Uploader.UserName.Contains(match));
+            return songs;
         }
     }
 }

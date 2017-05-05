@@ -38,7 +38,7 @@
         <td>
             @if (Model.OwnerId == User.Identity.GetUserId() || User.IsInRole("admin"))
             {
-                @Html.ActionLink(" ", "RemvoeSongFromPlaylist", new {songId = song.Id, playlistId = Model.Id}, new {@class = "glyphicon glyphicon-remove", style="color: #000; text-decoration: none;"})
+                @Html.ActionLink(" ", "RemvoeSongFromPlaylist", new {songId = song.Id, playlistId = Model.Id}, new {@class = "glyphicon glyphicon-remove", style="color: #000; text-decoration: none;", onclick="return confirm('Do you really want to delete it?')"})
             }
         </td>
     </tr>

@@ -1,0 +1,38 @@
+﻿@model MusicUploader.Models.ViewModels.Song.SearchSongViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search for song</h2>
+
+@using (Ajax.BeginForm("SearchFor", ajaxOptions: new AjaxOptions()
+{
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "searchResults"
+}))
+{
+    <div class="form-group">
+        <label for="SearchFor" class="control-label col-md-2">Keyword to search for</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SearchFor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SearchFor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br/>
+    <br/>
+    @Html.CheckBoxFor(model => model.MatchWithSongName) 
+    <span> Search in Songs names</span>
+    <br />
+    @Html.CheckBoxFor(model => model.MatchWithUploaderName) 
+    <span> Search in Songs uploader name</span>
+    <br />
+    @Html.CheckBoxFor(model => model.MatchWithUploaderUserName)
+    <span> Search in Songs uploader username</span>
+    <br/>
+    <input type="submit" class="btn btn-md btn-primary" value="Search"/>
+}
+
+<br/>
+<div class="container" id="searchResults"></div>

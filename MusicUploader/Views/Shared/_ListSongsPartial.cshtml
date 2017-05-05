@@ -32,7 +32,7 @@
                 <span> | </span>
                 @Html.ActionLink("Edit song", "Edit", "Songs", new { id = song.Id }, new {@class = "btn btn-xs btn-warning"})
                 <span> | </span>
-                @Html.ActionLink("Delete song", "Delete", "Songs", new { id = song.Id }, new {@class = "btn btn-xs btn-danger"})
+                @Html.ActionLink("Delete song", "Delete", "Songs", new { id = song.Id }, new {@class = "btn btn-xs btn-danger", onclick="return confirm('Do you really want to delete it?')"})
             }
             
         </td>

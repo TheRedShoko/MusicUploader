@@ -25,7 +25,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }, new {@class = "btn btn-xs btn-warning"}) |
-            <a href="./Delete/@item.Id" class="btn btn-xs btn-danger" onclick="return confirm('Do you really want to delete this genre and its songs?')">Delete</a>
+            @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-xs btn-danger", onclick = "return confirm('Do you really want to delete it?')" })
         </td>
     </tr>
 }
