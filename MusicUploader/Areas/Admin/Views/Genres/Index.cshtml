@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MusicUploader.Models.ViewModels.Genre.ListGenreViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All genres</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, new {@class = "btn btn-xs btn-warning"}) |
+            <a href="./Delete/@item.Id" class="btn btn-xs btn-danger" onclick="return confirm('Do you really want to delete this genre and its songs?')">Delete</a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model MusicUploader.Models.ViewModels.Song.SongsIndexViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All songs</h2>
+
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Upload New", "Upload", null, new { @class = "btn btn-md btn-primary" })
+    }
+</p>
+<br />
+
+<div class="container">
+    <div class="list-group col-sm-3">
+        @Ajax.ActionLink("All", "Update", new { genreId = 0 }, new AjaxOptions()
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "songsList"
+}, new { @class = "list-group-item" })
+        @foreach (var genre in Model.Genres)
+        {
+            @Ajax.ActionLink(genre.Name, "Update", new { genreId = genre.Id }, new AjaxOptions()
+   {
+       InsertionMode = InsertionMode.Replace,
+       UpdateTargetId = "songsList"
+   }, new { @class = "list-group-item" })
+        }
+    </div>
+    <div class="col-lg-9" id="songsList">
+        
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                    $("div.list-group a:first-child").trigger('click');
+                },
+                1);
+        });
+        $(function() {
+            $('.list-group a').click(function(e) {
+                e.preventDefault();
+
+                $that = $(this);
+
+                $that.parent().find('a').removeClass('active');
+                $that.addClass('active');
+            });
+        })
+    </script>
+}

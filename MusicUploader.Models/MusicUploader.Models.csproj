@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingModels\Comment\CreateCommentBindingModel.cs" />
+    <Compile Include="BindingModels\Comment\EditCommentBindingModel.cs" />
     <Compile Include="BindingModels\Genre\CreateGenreBindingModel.cs" />
     <Compile Include="BindingModels\Genre\EditGenreBindingModel.cs" />
     <Compile Include="BindingModels\Playlist\EditPlaylistBindingModel.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="ViewModels\Account\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Comment\EditCommentViewModel.cs" />
     <Compile Include="ViewModels\Genre\EditGenreViewModel.cs" />
     <Compile Include="ViewModels\Genre\ListGenreViewModel.cs" />
     <Compile Include="ViewModels\Playlist\EditPlaylistViewModel.cs" />
@@ -132,11 +134,11 @@
     <Compile Include="ViewModels\Song\DeleteSongViewModel.cs" />
     <Compile Include="ViewModels\Song\DetailedSongViewModel.cs" />
     <Compile Include="ViewModels\Song\EditSongViewModel.cs" />
+    <Compile Include="ViewModels\Song\ListSongsViewModel.cs" />
+    <Compile Include="ViewModels\Song\SongsIndexViewModel.cs" />
     <Compile Include="ViewModels\Song\ViewSongViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Comment\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

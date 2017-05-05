@@ -20,5 +20,7 @@ namespace MusicUploader.Data
         {
             return new MusicUploaderDbContext();
         }
+
+        public System.Data.Entity.DbSet<MusicUploader.Models.ViewModels.Playlist.ListPlaylistSongsViewModel> ListPlaylistSongsViewModels { get; set; }
     }
 }

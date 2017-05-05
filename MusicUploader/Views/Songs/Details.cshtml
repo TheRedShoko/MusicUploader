@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNet.Identity
+@model MusicUploader.Models.ViewModels.Song.DetailedSongViewModel
+
+<br/>
+<div class="row">
+    <img src="/uploads/image/@Model.ImageFileName" alt="Song cover" class="col-sm-3 img-thumbnail" style="max-width: 200px; max-height: 200px;" />
+    <div class="col-sm-9">
+        <h2>@Model.SongName</h2>
+        <audio controls>
+            <source src="/uploads/audio/@Model.AudioFileName"/>
+            Your browser does not support playing audio files!
+        </audio>
+        <br />
+        @if (User.Identity.IsAuthenticated && ViewBag.Playlists.Count != null)
+        {
+            <br/>
+            using (Html.BeginForm("AddSongToPlaylist", "Playlists", FormMethod.Get))
+            {
+                <div class="form-group">
+                    @Html.Hidden("songId", Model.Id)
+                    <label for="playlistId" class="control-label col-sm-2">Add song to playlist</label>
+                    <div class="col-md-3">
+                        @Html.DropDownList("playlistId", new SelectList(ViewBag.Playlists, "Id", "Name"), "~ Add to playlist ~", new { @class = "form-control" })
+                    </div>
+                    <input type="submit" class="btn btn-md btn-primary" value="Add to playlist"/>
+                </div>
+            }
+
+        }
+        <div style="text-align: right; font-size: 13px; color:#AAA">Uploaded by @Model.Uploader.FullName <strong>(@Model.Uploader.UserName)</strong></div>
+    </div>
+</div>
+<p>
+    @if (User.Identity.GetUserId() == Model.Uploader.Id || User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new {id = Model.Id}, new {@class = "btn btn-md btn-warning"})
+    }
+    
+    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-md btn-primary"})
+</p>
+<br/>
+<br />
+@foreach (var item in Model.Comments)
+{ 
+    <div>
+        @item.Author.FullName <strong>(@item.Author.UserName)</strong> 
+        <span style="color: #AAA; font-size:11px;">@item.CreationDate</span>
+        @if (User.Identity.GetUserId() == item.Author.Id || User.IsInRole("admin"))
+        {
+            @Html.ActionLink(" ", "Edit", "Comments", new { id = item.Id }, new { @class = "glyphicon glyphicon-pencil", style = "color: #000; text-decoration: none;" })
+            @Html.ActionLink(" ", "Delete", "Comments", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", style = "color: #000; text-decoration: none;" })
+        }
+        
+        <blockquote>@item.Content</blockquote>
+    </div>
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+    {
+        <div class="form-group">
+            <input type="hidden" value="@Model.Id" name="SongId"/>
+            <input type="text" placeholder="Type comment..." name="Content" class="form-control"/>
+        </div>
+    }
+}

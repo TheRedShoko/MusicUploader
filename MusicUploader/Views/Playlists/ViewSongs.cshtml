@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNet.Identity
+@model MusicUploader.Models.ViewModels.Playlist.ListPlaylistSongsViewModel
+
+@{
+    ViewBag.Title = "ViewSongs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Songs in @Model.Name</h2>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            Song name
+        </th>
+        <th>
+            Song genre
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var song in Model.Songs) {
+    <tr>
+        <td>
+            <img src="/uploads/image/@song.ImageFileName" style="max-width: 20px; max-height: 20px;" class="img-circle"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => song.SongName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => song.Genre.Name)
+        </td>
+        <td>
+            @Html.ActionLink("View song", "Details", "Songs", new {id = song.Id}, new {@class="btn btn-xs btn-primary"})
+        </td>
+        <td>
+            @if (Model.OwnerId == User.Identity.GetUserId() || User.IsInRole("admin"))
+            {
+                @Html.ActionLink(" ", "RemvoeSongFromPlaylist", new {songId = song.Id, playlistId = Model.Id}, new {@class = "glyphicon glyphicon-remove", style="color: #000; text-decoration: none;"})
+            }
+        </td>
+    </tr>
+}
+
+</table>

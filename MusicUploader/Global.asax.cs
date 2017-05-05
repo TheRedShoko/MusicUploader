@@ -2,10 +2,12 @@
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
+using MusicUploader.Models.BindingModels.Comment;
 using MusicUploader.Models.BindingModels.Genre;
 using MusicUploader.Models.BindingModels.Playlist;
 using MusicUploader.Models.BindingModels.Song;
 using MusicUploader.Models.EntityModels;
+using MusicUploader.Models.ViewModels.Comment;
 using MusicUploader.Models.ViewModels.Genre;
 using MusicUploader.Models.ViewModels.Playlist;
 using MusicUploader.Models.ViewModels.Song;
@@ -47,6 +49,11 @@ namespace MusicUploader
                 config.CreateMap<Playlist, EditPlaylistViewModel>();
                 config.CreateMap<EditPlaylistBindingModel, Playlist>();
                 config.CreateMap<EditPlaylistBindingModel, EditPlaylistViewModel>();
+
+                config.CreateMap<Comment, EditCommentViewModel>();
+                config.CreateMap<EditCommentViewModel, Comment>();
+                config.CreateMap<EditCommentBindingModel, EditCommentViewModel>();
+                config.CreateMap<EditCommentBindingModel, Comment>();
             });
         }
     }
